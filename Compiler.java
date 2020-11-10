@@ -73,9 +73,7 @@ public class Compiler {
 			return 6;
 		}
 	}
-	public static void printStack(Stack<Character> ee) {
-		System.out.println(ee.toString());
-	}
+
 	public static void main(String[] args) {
 		Compiler compiler = new Compiler();
 		compiler.readFile(args[0]);
