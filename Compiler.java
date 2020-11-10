@@ -86,7 +86,7 @@ public class Compiler {
 				break;
 			}
 			int sign1 = compiler.search(compiler.readinChar);
-			while((!compiler.operatorStack.empty())&&(!b)) {
+			while(!compiler.operatorStack.empty()) {
 				b = false;
 				int sign2 = compiler.search(compiler.operatorStack.peek());
 				//System.out.println(test.relation[sign2][sign1]);
@@ -143,6 +143,9 @@ public class Compiler {
 					System.out.println("E");
 					b = true;
 					a = true;
+					break;
+				}
+				if(b) {
 					break;
 				}
 			}
