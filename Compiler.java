@@ -137,9 +137,9 @@ public class Compiler {
 					break;
 				// null
 				case -1:
-					if(compiler.readinChar == '#') {
+					/*if(compiler.readinChar == '#') {
 						System.out.println("RE");
-					}else
+					}else*/
 					System.out.println("E");
 					b = true;
 					a = true;
