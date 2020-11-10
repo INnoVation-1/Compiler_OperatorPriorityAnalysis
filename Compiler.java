@@ -30,7 +30,7 @@ public class Compiler {
 			 this.strStack.push('#');
 			 this.operatorStack.push('#');
 			 for(int i = inputString.length() - 1; i >= 0; i--) {
-				 if(Character.isLetter(inputString.charAt(i)) || inputString.charAt(i) == 'i' || inputString.charAt(i) == '+' || inputString.charAt(i) == '(' || inputString.charAt(i) == ')' || inputString.charAt(i) == '*') {
+				 if(inputString.charAt(i) == 'i' || inputString.charAt(i) == '+' || inputString.charAt(i) == '(' || inputString.charAt(i) == ')' || inputString.charAt(i) == '*') {
 					 this.strStack.push(inputString.charAt(i));
 				 } 
 			 }
@@ -45,7 +45,6 @@ public class Compiler {
 		}
 		return true;
 	}
-
 	public int search(char readinChar) {
 		switch(readinChar) {
 		case '+':
@@ -64,7 +63,16 @@ public class Compiler {
 			return 6;
 		}
 	}
-	
+	public static int stackLen(Stack<Character> ee) {
+		int temp = 0;
+		for(int i = 0; i < ee.size(); i++) {
+			if(ee.get(i) == '(' || ee.get(i) == ')') {
+				continue;
+			}
+			temp ++;
+		}
+		return temp;
+	}
 	public static void printStack(Stack<Character> ee) {
 		System.out.println(ee.toString());
 	}
@@ -98,6 +106,12 @@ public class Compiler {
 						compiler.operatorStack.pop();
 					}else {
 						try {
+							if(stackLen(compiler.operatorStack) != compiler.objStack.size()) {
+								System.out.println("RE");
+								a = true;
+								b = true;
+								break;
+							}
 							compiler.objStack.pop();
 							compiler.objStack.pop();
 							compiler.objStack.push('N');
