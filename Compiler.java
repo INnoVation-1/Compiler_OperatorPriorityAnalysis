@@ -1,9 +1,7 @@
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Stack;
-
+import java.io.IOException;
 
 public class Compiler {
 	public Stack<Character> objStack = new Stack<Character>();
@@ -17,8 +15,7 @@ public class Compiler {
 			{1, 1, -1, -1, 1, 1}, 
 			{0, 0, 0, 0, -1, 2}
 			};
-	public char readinChar;
-	public void readFile(String inSource) {
+	public void fOpen(String inSource) {
 		File file = new File(inSource);
 		try {
 			 FileInputStream input=new FileInputStream(file);
@@ -35,9 +32,10 @@ public class Compiler {
 				 } 
 			 }
 		} catch (IOException e) {
-		 e.printStackTrace();
+			
 		}
 	}
+	public char readinChar;
 	public boolean getChar() {
 		this.readinChar = this.strStack.pop();
 		if(search(this.readinChar) == 6) {
@@ -45,15 +43,15 @@ public class Compiler {
 		}
 		return true;
 	}
-	public static int getStackLen(Stack<Character> ee) {
-		int temp = 0;
-		for(int i = 0; i < ee.size(); i++) {
-			if(ee.get(i) == '(' || ee.get(i) == ')') {
+	public static int stackLen(Stack<Character> st) {
+		int cnt = 0;
+		for(int i = 0; i < st.size(); i++) {
+			if(st.get(i) == '(' || st.get(i) == ')') {
 				continue;
 			}
-			temp ++;
+			cnt ++;
 		}
-		return temp;
+		return cnt;
 	}
 	public int search(char readinChar) {
 		switch(readinChar) {
@@ -76,7 +74,7 @@ public class Compiler {
 
 	public static void main(String[] args) {
 		Compiler compiler = new Compiler();
-		compiler.readFile(args[0]);
+		compiler.fOpen(args[0]);
 		boolean a = false;
 		boolean b = false;
 		
@@ -104,7 +102,7 @@ public class Compiler {
 						compiler.operatorStack.pop();
 					}else {
 						try {
-							if(getStackLen(compiler.operatorStack) != compiler.objStack.size()) {
+							if(stackLen(compiler.operatorStack) != compiler.objStack.size()) {
 								System.out.println("RE");
 								b = true;
 								a = true;
@@ -135,11 +133,7 @@ public class Compiler {
 					compiler.operatorStack.pop();
 					b = true;
 					break;
-				// null
 				case -1:
-					/*if(compiler.readinChar == '#') {
-						System.out.println("RE");
-					}else*/
 					System.out.println("E");
 					b = true;
 					a = true;
