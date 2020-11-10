@@ -30,7 +30,7 @@ public class Compiler {
 			 this.strStack.push('#');
 			 this.operatorStack.push('#');
 			 for(int i = inputString.length() - 1; i >= 0; i--) {
-				 if(inputString.charAt(i) == 'i' || inputString.charAt(i) == '+' || inputString.charAt(i) == '(' || inputString.charAt(i) == ')' || inputString.charAt(i) == '*') {
+				 if(Character.isLetter(inputString.charAt(i)) || inputString.charAt(i) == 'i' || inputString.charAt(i) == '+' || inputString.charAt(i) == '(' || inputString.charAt(i) == ')' || inputString.charAt(i) == '*') {
 					 this.strStack.push(inputString.charAt(i));
 				 } 
 			 }
@@ -45,6 +45,7 @@ public class Compiler {
 		}
 		return true;
 	}
+
 	public int search(char readinChar) {
 		switch(readinChar) {
 		case '+':
